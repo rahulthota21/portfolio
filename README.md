@@ -1,5 +1,5 @@
 
-# Crafted Tech Visions – Portfolio
+# Portfolio
 
 > 🚀 A sleek, professional developer portfolio to showcase your projects, skills, and experience.
 
