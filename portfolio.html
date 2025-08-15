@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Thota | AI & Backend Engineer</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>R</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <!-- State-of-the-art Animation & 3D Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+
+    <style>
+        /*
+        ==========================================================================
+        1.  ROOT & THEME VARIABLES
+        ==========================================================================
+        */
+        :root {
+            --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+            --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .light-theme {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F7F7F7;
+            --bg-card: rgba(255, 255, 255, 0.85); /* Semi-transparent for depth */
+            --text-primary: #1F1F1F;
+            --text-secondary: #5F6368;
+            --text-accent: #0b57d0;
+            --border-color: #E0E0E0;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --shadow-color-hover: rgba(0, 0, 0, 0.1);
+            --icon-color: #4F4F4F;
+            --accent-gold: #D4AF37;
+        }
+
+        .dark-theme {
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #171717;
+            --bg-card: rgba(28, 28, 30, 0.85); /* Semi-transparent for depth */
+            --text-primary: #F0F0F0;
+            --text-secondary: #9E9E9E;
+            --text-accent: #8ab4f8;
+            --border-color: #333333;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --shadow-color-hover: rgba(0, 0, 0, 0.4);
+            --icon-color: #BDBDBD;
+            --accent-gold: #FFD700;
+        }
+
+        /*
+        ==========================================================================
+        2.  BASE & RESET STYLES
+        ==========================================================================
+        */
+        @font-face {
+            font-family: 'Google Sans';
+            src: url('https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Google Sans';
+            src: url('https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwejd_0LZdjqr5-oayXSOefg.woff2') format('woff2');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'Google Sans';
+            src: url('https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumweqc_0LZdjqr5-oayXSOefg.woff2') format('woff2');
+            font-weight: 700;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Google Sans', 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.5s var(--ease-in-out-cubic), color 0.5s var(--ease-in-out-cubic);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+        
+        a, button {
+            cursor: none;
+        }
+
+        /*
+        ==========================================================================
+        3.  3D CANVAS & CUSTOM CURSOR
+        ==========================================================================
+        */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--text-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.3s var(--ease-out-quart), width 0.3s var(--ease-out-quart), height 0.3s var(--ease-out-quart), background-color 0.3s var(--ease-out-quart);
+            z-index: 9999;
+        }
+
+        .custom-cursor.pointer {
+            transform: translate(-50%, -50%) scale(5);
+            background-color: rgba(138, 180, 248, 0.2);
+        }
+        
+        .custom-cursor.magnetic {
+            transform: translate(-50%, -50%) scale(2.5);
+        }
+
+        /*
+        ==========================================================================
+        4.  LAYOUT & CONTAINER
+        ==========================================================================
+        */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 8rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        /*
+        ==========================================================================
+        5.  HEADER & NAVIGATION
+        ==========================================================================
+        */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: background-color 0.3s var(--ease-out-quart), box-shadow 0.3s var(--ease-out-quart), transform 0.3s var(--ease-out-quart);
+        }
+
+        header.scrolled {
+            background-color: rgba(var(--bg-primary-rgb, 255, 255, 255), 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+        
+        header.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--text-accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s var(--ease-out-quart);
+            position: relative;
+            padding: 0.5rem;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--text-accent);
+            transition: width 0.3s var(--ease-out-quart);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--text-primary);
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--icon-color);
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mobile-nav-toggle { display: none; }
+        
+        /*
+        ==========================================================================
+        6.  HERO SECTION
+        ==========================================================================
+        */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+        
+        .hero .tagline-small {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 500;
+            color: var(--text-accent);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+            color: var(--text-secondary);
+            margin: 1.5rem auto 2.5rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s var(--ease-out-quart), box-shadow 0.3s var(--ease-out-quart);
+            border: 1px solid transparent;
+            position: relative;
+        }
+
+        .btn-primary {
+            background-color: var(--text-accent);
+            color: var(--bg-primary);
+            border-color: var(--text-accent);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-color-hover);
+        }
+        
+        /*
+        ==========================================================================
+        7.  GENERAL STYLING & UTILITIES
+        ==========================================================================
+        */
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.4s var(--ease-out-quart), box-shadow 0.4s var(--ease-out-quart);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px var(--shadow-color-hover);
+        }
+        
+        /*
+        ==========================================================================
+        8.  ABOUT & SKILLS SECTIONS
+        ==========================================================================
+        */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-avatar {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 16px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .about-text h3 {
+            font-size: 1.75rem;
+            margin-top: 0;
+        }
+        
+        .skills-marquee {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .skills-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 40s linear infinite;
+        }
+        
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 2.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /*
+        ==========================================================================
+        9.  EXPERIENCE SECTION (PINNED LAYOUT)
+        ==========================================================================
+        */
+        .experience-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+
+        .experience-sticky-panel {
+            position: sticky;
+            top: 150px;
+            height: 50vh;
+        }
+
+        .experience-scroll-panel .timeline-item {
+            margin-bottom: 4rem;
+            opacity: 0.5;
+            transition: opacity 0.4s ease;
+        }
+
+        .experience-scroll-panel .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .experience-scroll-panel .timeline-item.is-active {
+            opacity: 1;
+        }
+        
+        .timeline-content {
+            padding: 1.5rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        /*
+        ==========================================================================
+        10. PROJECTS, PUBLICATIONS, ETC.
+        ==========================================================================
+        */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .item-card {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .item-card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .item-card h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        .item-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .item-tags {
+            display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .item-links {
+            display: flex; gap: 1rem; margin-top: auto;
+        }
+        
+        .item-links a {
+            color: var(--text-accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .item-card .status {
+            font-size: 0.9rem; font-weight: 600; color: var(--accent-gold); margin-bottom: 0.5rem; display: block;
+        }
+
+        .item-card .conference {
+            font-weight: 500; color: var(--text-secondary); font-style: italic;
+        }
+        
+        .blog-card {
+            display: flex; gap: 1.5rem; align-items: flex-start;
+            text-decoration: none;
+            color: inherit;
+        }
+        .blog-card-img {
+            width: 120px; height: 120px; object-fit: cover; border-radius: 12px; flex-shrink: 0;
+        }
+        
+        .outreach-card {
+            text-align: center;
+        }
+        .outreach-card .feather {
+            width: 48px; height: 48px; color: var(--text-accent); margin-bottom: 1rem;
+        }
+        
+        /*
+        ==========================================================================
+        11. CONTACT & FOOTER
+        ==========================================================================
+        */
+        .contact-container {
+            max-width: 700px; margin: 0 auto; text-align: center;
+        }
+        .contact-form {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; text-align: left;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-input {
+            width: 100%; padding: 1rem; background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; font-size: 1rem; color: var(--text-primary);
+        }
+        
+        footer {
+            padding: 4rem 2rem; text-align: center; background-color: var(--bg-secondary); color: var(--text-secondary);
+        }
+        .social-links {
+            display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem;
+        }
+        .social-links a {
+            color: var(--icon-color); transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--text-primary); transform: scale(1.2);
+        }
+        .footer-status {
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1.5rem;
+        }
+        .status-dot {
+            width: 8px; height: 8px; background-color: #34C759; border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(52, 199, 89, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
+        }
+
+        /*
+        ==========================================================================
+        12. RESPONSIVE DESIGN
+        ==========================================================================
+        */
+        @media (max-width: 992px) {
+            .about-grid, .experience-wrapper {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .experience-sticky-panel {
+                position: static;
+                height: auto;
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+             .experience-sticky-panel .section-title {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html { font-size: 14px; }
+            nav ul { display: none; }
+            .mobile-nav-toggle { display: block; background: none; border: none; color: var(--icon-color); }
+            .contact-form { grid-template-columns: 1fr; }
+        }
+        
+        /* GSAP animation prep */
+        .gsap-reveal { opacity: 0; transform: translateY(50px); }
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="custom-cursor"></div>
+
+    <header id="main-header">
+        <div class="nav-container">
+            <a href="#home" class="logo magnetic">Rahul Thota<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#about" class="nav-link magnetic">About</a></li>
+                    <li><a href="#skills" class="nav-link magnetic">Skills</a></li>
+                    <li><a href="#experience" class="nav-link magnetic">Experience</a></li>
+                    <li><a href="#projects" class="nav-link magnetic">Projects</a></li>
+                    <li><a href="#hackathons" class="nav-link magnetic">Hackathons</a></li>
+                    <li><a href="#outreach" class="nav-link magnetic">Outreach</a></li>
+                    <li><a href="#publications" class="nav-link magnetic">Publications</a></li>
+                    <li><a href="#blog" class="nav-link magnetic">Blog</a></li>
+                    <li><a href="#contact" class="nav-link magnetic">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-right">
+                <button class="theme-toggle magnetic" id="theme-toggle" aria-label="Toggle theme">
+                    <i data-feather="moon"></i>
+                    <i data-feather="sun" style="display: none;"></i>
+                </button>
+                 <button class="mobile-nav-toggle magnetic">
+                    <i data-feather="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <span class="tagline-small gsap-reveal">Aspiring</span>
+                <h1 class="gsap-reveal">AI & Backend Engineer</h1>
+                <p class="gsap-reveal">Enthusiastic Computer Science student building impactful, intelligent applications and contributing to cutting-edge research. Passionate about turning complex problems into elegant, scalable solutions.</p>
+                <div class="hero-buttons gsap-reveal">
+                    <a href="#contact" class="btn btn-primary magnetic">
+                        <i data-feather="send"></i><span>Get in Touch</span>
+                    </a>
+                    <a href="https://drive.google.com/uc?export=download&id=1gpSB7FSUYvUnAQOQ2ULzgeXJWKlThFJ0" target="_blank" class="btn btn-secondary magnetic">
+                        <i data-feather="download"></i><span>Download Resume</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <div class="section-title gsap-reveal">
+                    <h2>About Me</h2>
+                </div>
+                <div class="about-grid card gsap-reveal">
+                    <img src="assets/Rahul.jpg" alt="Rahul Thota Avatar" class="about-avatar">
+                    <div class="about-text">
+                        <h3>Crafting the Future with Code</h3>
+                        <p>I am a Computer Science undergraduate at Amrita Vishwa Vidyapeetham with a profound passion for Artificial Intelligence and robust backend systems. My experience spans from developing emotion-aware AI tutors and mock interview platforms to contributing to research papers accepted in esteemed conferences.</p>
+                        <p>Driven by a desire to learn and innovate, I excel in collaborative environments, leveraging modern tools like Docker, FastAPI, and GitHub Actions to build and deploy efficient, real-world applications. I'm always eager to connect with fellow professionals and explore new opportunities to create technology that matters.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills" class="skills-container">
+            <div class="skills-marquee">
+                <div class="skills-track">
+                    <div class="skill-item">Python</div><div class="skill-item">FastAPI</div><div class="skill-item">TensorFlow</div><div class="skill-item">Docker</div><div class="skill-item">PostgreSQL</div><div class="skill-item">Scikit-learn</div><div class="skill-item">REST APIs</div><div class="skill-item">GitHub Actions</div><div class="skill-item">Pytest</div><div class="skill-item">LLMs</div><div class="skill-item">RAG</div>
+                    <div class="skill-item">Python</div><div class="skill-item">FastAPI</div><div class="skill-item">TensorFlow</div><div class="skill-item">Docker</div><div class="skill-item">PostgreSQL</div><div class="skill-item">Scikit-learn</div><div class="skill-item">REST APIs</div><div class="skill-item">GitHub Actions</div><div class="skill-item">Pytest</div><div class="skill-item">LLMs</div><div class="skill-item">RAG</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <div class="experience-wrapper">
+                    <div class="experience-sticky-panel">
+                        <div class="section-title" style="text-align: left;">
+                            <h2 class="gsap-reveal">Career Journey</h2>
+                            <p class="gsap-reveal">A timeline of my professional experience and key contributions.</p>
+                        </div>
+                    </div>
+                    <div class="experience-scroll-panel">
+                        <div class="timeline-item" id="job-1">
+                            <div class="timeline-content card">
+                                <span class="date">Oct 2024 - Dec 2024 (Expected)</span>
+                                <h3>AI Intern</h3>
+                                <span class="company">Infosys Springboard (Remote)</span>
+                                <ul>
+                                    <li>Developed end-to-end ML pipelines for high-performance inference and feature engineering.</li>
+                                    <li>Applied advanced evaluation techniques including AUC-ROC, precision-recall curves, and confusion matrix analysis.</li>
+                                    <li>Prototyped lightweight APIs to serve model predictions and documented key results.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <div class="section-title gsap-reveal">
+                    <h2>Featured Projects</h2>
+                    <p>A selection of projects where I've turned ideas into reality.</p>
+                </div>
+                <div class="grid-layout">
+                    <div class="item-card card gsap-reveal">
+                        <div class="item-card-content">
+                            <h3>AffectLearn: Emotion-Adaptive AI Tutor</h3>
+                            <p>An AI-driven learning assistant that adapts educational content in real-time based on multimodal sentiment analysis.</p>
+                            <div class="item-tags"><span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">FastAPI</span></div>
+                            <div class="item-links"><a href="https://github.com/rahulthota21/AffectLearn" class="magnetic"><i data-feather="github"></i> GitHub</a></div>
+                        </div>
+                    </div>
+                    <div class="item-card card gsap-reveal">
+                        <div class="item-card-content">
+                            <h3>Mock'n-Hire: AI Interview Platform</h3>
+                            <p>A comprehensive system that automates resume screening with semantic ranking and conducts emotion-aware mock interviews.</p>
+                            <div class="item-tags"><span class="tag">Transformers</span><span class="tag">MobileNetV2</span></div>
+                            <div class="item-links"><a href="https://github.com/rahulthota21/mock-n-hire" class="magnetic"><i data-feather="github"></i> GitHub</a></div>
+                        </div>
+                    </div>
+                    <div class="item-card card gsap-reveal">
+                        <div class="item-card-content">
+                            <h3>TravelSync: AI Trip Planner</h3>
+                            <p>An intelligent travel assistant that generates personalized itineraries, integrating flight search and hotel recommendations.</p>
+                            <div class="item-tags"><span class="tag">Streamlit</span><span class="tag">Google Vision</span></div>
+                            <div class="item-links"><a href="https://github.com/rahulthota21/travel-sync" class="magnetic"><i data-feather="github"></i> GitHub</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hackathons" style="background-color: var(--bg-secondary);">
+             <div class="container">
+                <div class="section-title gsap-reveal">
+                    <h2>Hackathons</h2>
+                    <p>Where I've built innovative solutions under pressure.</p>
+                </div>
+                <div class="grid-layout">
+                    <div class="item-card card gsap-reveal">
+                        <div class="item-card-content">
+                            <span class="status" style="color: var(--text-accent);">Top 10 Finalist</span>
+                            <h3>Tredence Hackathon</h3>
+                            <p>Developed a full-stack AI travel assistant, securing a top 10 position out of 65 teams for innovation, execution, and teamwork.</p>
+                            <div class="item-tags"><span class="tag">AI Planner</span><span class="tag">React</span><span class="tag">Team Collab</span></div>
+                            <div class="item-links"><a href="https://www.linkedin.com/posts/rahulthota21_hackathon-aiinnovation-machinelearning-activity-7324099627522101248-Q0WE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEXTOugB4Acjc17YIoOM61Rr3wj2vG4fVLM" class="magnetic"><i data-feather="award"></i> View Achievement</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="outreach">
+            <div class="container">
+                <div class="section-title gsap-reveal">
+                    <h2>Community Outreach</h2>
+                    <p>Sharing knowledge and inspiring the next generation.</p>
+                </div>
+                <div class="grid-layout" style="grid-template-columns: 1fr;">
+                    <div class="item-card card gsap-reveal outreach-card">
+                        <i data-feather="users"></i>
+                        <h3>AI & Career Guidance Workshop</h3>
+                        <p>Led a workshop at S.R. Digi School for the Student Social Responsibility (SSR) program. Introduced students to AI applications, ethics, and real-world impact through hands-on demos in Deep Learning and NLP.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications" style="background-color: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-title gsap-reveal">
+                    <h2>Publications</h2>
+                    <p>My contributions to academic research.</p>
+                </div>
+                <div class="grid-layout">
+                    <div class="item-card card gsap-reveal">
+                        <div class="item-card-content">
+                            <span class="status">Under Review</span>
+                            <h3>Affect Learn: Sentiment-Aware STEM Tutor</h3>
+                            <p class="conference">IEEE TALE 2025</p>
+                            <p>Paper detailing the architecture of a LoRA-tuned LLM with RAG for creating an emotion-adaptive tutoring system.</p>
+                            <div class="item-links"><a href="#" class="magnetic"><i data-feather="file-text"></i>Coming Soon </a></div>
+                        </div>
+                    </div>
+                    <div class="item-card card gsap-reveal">
+                        <div class="item-card-content">
+                            <span class="status">Accepted</span>
+                            <h3>Mock'n-Hire: Resume Screening & Mock Interviews</h3>
+                            <p class="conference">ICCNT 2025</p>
+                            <p>Research on a Transformer-based resume scoring model and real-time stress detection during AI-driven interviews.</p>
+                             <div class="item-links"><a href="#" class="magnetic"><i data-feather="file-text"></i> About To Publish (Soon)</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog">
+             <div class="container">
+                <div class="section-title gsap-reveal">
+                    <h2>From My Blog</h2>
+                    <p>Sharing insights and stories about technology and innovation.</p>
+                </div>
+                <div class="grid-layout" style="grid-template-columns: 1fr;">
+                     <div class="card gsap-reveal">
+                        <a href="https://medium.com/@rahulthota21/ais-secret-mission-5-mind-blowing-stories-that-prove-we-re-living-in-the-future-and-you-had-no-2bb918178e38" target="_blank" class="blog-card">
+                            <img src="https://placehold.co/240x240/8ab4f8/FFFFFF?text=AI" alt="AI's Secret Mission Blog Post" class="blog-card-img">
+                            <div class="item-card-content" style="padding: 0;">
+                                <h3>AI's Secret Mission: 5 Mind-Blowing Stories</h3>
+                                <p>An exploration into fascinating AI applications that prove we're already living in the future, from creative coding to scientific discovery. Published on Medium.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container contact-container">
+                <div class="section-title gsap-reveal">
+                    <h2>Let's Connect</h2>
+                    <p>I'm currently seeking new opportunities and am open to collaborations. Feel free to reach out.</p>
+                </div>
+                <form action="https://formspree.io/f/xovlbppn" method="POST" class="contact-form gsap-reveal">
+                    <div class="form-group"><input type="text" name="name" class="form-input" placeholder="Your Name" required></div>
+                    <div class="form-group"><input type="email" name="email" class="form-input" placeholder="Your Email" required></div>
+                    <div class="form-group full-width"><textarea name="message" class="form-input" rows="6" placeholder="Your Message" required></textarea></div>
+                    <div class="form-group full-width" style="text-align: center;"> <button type="submit" class="btn btn-primary form-btn magnetic"><i data-feather="send"></i><span>Send Message</span></button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/rahulthota21/" target="_blank" aria-label="LinkedIn" class="magnetic"><i data-feather="linkedin"></i></a>
+                <a href="https://github.com/rahulthota21" target="_blank" aria-label="GitHub" class="magnetic"><i data-feather="github"></i></a>
+                <a href="https://leetcode.com/RahulThota_/" target="_blank" aria-label="LeetCode" class="magnetic"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"><title>LeetCode</title><path d="M13.483 0a1.374 1.374 0 0 0-1.374 1.374v10.5h2.748v-10.5A1.374 1.374 0 0 0 13.483 0zM4.12 6.87V24h2.748V6.87a1.374 1.374 0 1 0-2.748 0zm15.76 0V24h2.748V6.87a1.374 1.374 0 1 0-2.748 0z"></path></svg></a>
+                <a href="mailto:rahulthota21@gmail.com" aria-label="Email" class="magnetic"><i data-feather="mail"></i></a>
+            </div>
+            <p>&copy; 2025 Rahul Thota. All rights reserved.</p>
+            <div class="footer-status">
+                <div class="status-dot"></div>
+                <span>Available for new opportunities</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // =========================================================================
+        // CORE SETUP
+        // =========================================================================
+        feather.replace();
+        gsap.registerPlugin(ScrollTrigger);
+
+        // =========================================================================
+        // 3D BACKGROUND SCENE (THREE.JS)
+        // =========================================================================
+        let scene, camera, renderer, particles, uniforms;
+
+        function init3D() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const particleCount = 5000;
+            const positions = new Float32Array(particleCount * 3);
+            for (let i = 0; i < particleCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 10;
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            uniforms = {
+                time: { value: 1.0 },
+                pointColor: { value: new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--text-accent')) }
+            };
+
+            const material = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: `
+                    uniform float time;
+                    attribute float size;
+                    void main() {
+                        vec3 pos = position;
+                        pos.z += sin(pos.x * 10.0 + time) * 0.1;
+                        pos.y += cos(pos.x * 5.0 + time) * 0.1;
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+                        gl_PointSize = 1.5;
+                    }
+                `,
+                fragmentShader: `
+                    uniform vec3 pointColor;
+                    void main() {
+                        gl_FragColor = vec4(pointColor, 0.5);
+                    }
+                `,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                depthTest: false
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            animate3D();
+        }
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+            uniforms.time.value += 0.01;
+            particles.rotation.y += 0.0001;
+            renderer.render(scene, camera);
+        }
+        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        window.addEventListener('resize', onWindowResize, false);
+        
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            camera.position.x += (mouseX * 0.1 - camera.position.x) * 0.02;
+            camera.position.y += (mouseY * 0.1 - camera.position.y) * 0.02;
+            camera.lookAt(scene.position);
+        });
+
+        // =========================================================================
+        // THEME TOGGLE
+        // =========================================================================
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = themeToggle.querySelector('.feather-sun');
+        const moonIcon = themeToggle.querySelector('.feather-moon');
+        const htmlEl = document.documentElement;
+
+        function updateTheme(isDark) {
+            sunIcon.style.display = isDark ? 'block' : 'none';
+            moonIcon.style.display = isDark ? 'none' : 'block';
+            
+             if (uniforms) {
+                const newColor = getComputedStyle(document.documentElement).getPropertyValue('--text-accent');
+                uniforms.pointColor.value.set(newColor);
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            htmlEl.classList.toggle('dark-theme');
+            htmlEl.classList.toggle('light-theme');
+            updateTheme(htmlEl.classList.contains('dark-theme'));
+        });
+        
+        updateTheme(htmlEl.classList.contains('dark-theme'));
+
+        // =========================================================================
+        // CUSTOM CURSOR & MAGNETIC EFFECT
+        // =========================================================================
+        const cursor = document.querySelector('.custom-cursor');
+        
+        document.addEventListener('mousemove', e => {
+            gsap.to(cursor, { duration: 0.3, x: e.clientX, y: e.clientY, ease: 'power3.out' });
+        });
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseover', () => cursor.classList.add('pointer'));
+            el.addEventListener('mouseout', () => cursor.classList.remove('pointer'));
+        });
+
+        document.querySelectorAll('.magnetic').forEach(el => {
+            el.addEventListener('mousemove', function(e) {
+                const { left, top, width, height } = this.getBoundingClientRect();
+                const x = e.clientX - (left + width / 2);
+                const y = e.clientY - (top + height / 2);
+                gsap.to(this, { x: x * 0.4, y: y * 0.4, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
+                cursor.classList.add('magnetic');
+            });
+            el.addEventListener('mouseleave', function() {
+                gsap.to(this, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
+                cursor.classList.remove('magnetic');
+            });
+        });
+
+        // =========================================================================
+        // GSAP ANIMATIONS & SCROLLSPY
+        // =========================================================================
+        const showAnim = gsap.from('#main-header', { 
+            yPercent: -100,
+            paused: true,
+            duration: 0.2
+        }).progress(1);
+
+        ScrollTrigger.create({
+            start: "top top",
+            end: 99999,
+            onUpdate: (self) => {
+                self.direction === -1 ? showAnim.play() : showAnim.reverse()
+            }
+        });
+
+        gsap.utils.toArray('.gsap-reveal').forEach(el => {
+            gsap.fromTo(el, 
+                { y: 50, opacity: 0 }, 
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        if (window.innerWidth > 992) {
+            ScrollTrigger.create({
+                trigger: ".experience-wrapper",
+                start: "top top",
+                end: "bottom bottom",
+                pin: ".experience-sticky-panel",
+            });
+
+            gsap.utils.toArray('.timeline-item').forEach((item) => {
+                ScrollTrigger.create({
+                    trigger: item,
+                    start: 'top center',
+                    end: 'bottom center',
+                    onToggle: self => self.isActive && item.classList.add('is-active'),
+                    onLeaveBack: () => item.classList.remove('is-active'),
+                    onLeave: () => item.classList.remove('is-active'),
+                });
+            });
+        }
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+        sections.forEach(section => {
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top center",
+                end: "bottom center",
+                onToggle: self => {
+                    if(self.isActive) {
+                        const id = section.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        // Initialize 3D scene
+        init3D();
+    });
+    </script>
+</body>
+</html>
