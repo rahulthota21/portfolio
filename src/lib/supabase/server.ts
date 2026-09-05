@@ -16,10 +16,26 @@ export const supabaseAdminConfigured = Boolean(SUPABASE_URL && SERVICE_ROLE);
 /** The only address permitted to sign in at /jackal. */
 export const ADMIN_EMAIL = (process.env.ADMIN_EMAIL ?? 'rahulthota21@gmail.com').toLowerCase();
 
+/**
+ * Server-side calls never wait on a dead network for minutes. If Supabase is
+ * slow or unreachable the request aborts after a few seconds and the page
+ * falls back to seed data instead of hanging the whole render.
+ */
+const FETCH_TIMEOUT_MS = 4000;
+export const boundedFetch: typeof fetch = (input, init) =>
+  fetch(input, {
+    ...init,
+    signal:
+      typeof AbortSignal !== 'undefined' && AbortSignal.timeout
+        ? AbortSignal.timeout(FETCH_TIMEOUT_MS)
+        : init?.signal,
+  });
+
 /** Cookie-bound client for Server Components, Route Handlers and Server Actions. */
 export function createSupabaseServerClient() {
   const cookieStore = cookies();
   return createServerClient(SUPABASE_URL, SUPABASE_ANON, {
+    global: { fetch: boundedFetch },
     cookies: {
       get: (name: string) => cookieStore.get(name)?.value,
       set: (name: string, value: string, options: CookieOptions) => {
@@ -48,6 +64,7 @@ export function createSupabaseAdminClient() {
   if (!supabaseAdminConfigured) return null;
   return createClient(SUPABASE_URL, SERVICE_ROLE, {
     auth: { persistSession: false, autoRefreshToken: false },
+    global: { fetch: boundedFetch },
   });
 }
 
@@ -56,5 +73,6 @@ export function createSupabasePublicClient() {
   if (!supabaseConfigured) return null;
   return createClient(SUPABASE_URL, SUPABASE_ANON, {
     auth: { persistSession: false, autoRefreshToken: false },
+    global: { fetch: boundedFetch },
   });
 }

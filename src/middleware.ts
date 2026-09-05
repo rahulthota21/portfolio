@@ -14,6 +14,16 @@ function noIndex(res: NextResponse) {
   return res;
 }
 
+/** Abort after a few seconds so a slow Supabase can never hang the guard. */
+const boundedFetch: typeof fetch = (input, init) =>
+  fetch(input, {
+    ...init,
+    signal:
+      typeof AbortSignal !== 'undefined' && AbortSignal.timeout
+        ? AbortSignal.timeout(4000)
+        : init?.signal,
+  });
+
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next({ request: { headers: req.headers } });
 
@@ -36,6 +46,7 @@ export async function middleware(req: NextRequest) {
   if (!url || !key) return res;
 
   const supabase = createServerClient(url, key, {
+    global: { fetch: boundedFetch },
     cookies: {
       get: (name: string) => req.cookies.get(name)?.value,
       set: (name: string, value: string, options: CookieOptions) => {
