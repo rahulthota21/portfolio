@@ -181,3 +181,47 @@ body {
   line-height: 1.13;
   font-weight: 650;
 }
+
+/* ── Custom cursor - rendered natively by the browser: no JS, no lag,
+   pixel-perfect like the default arrow. Ink dot with a light halo so it
+   reads on both themes; links get a slightly larger ring. ────────────── */
+* {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.5' fill='%23141414' stroke='%23ffffff' stroke-width='2'/%3E%3C/svg%3E")
+      12 12,
+    default;
+}
+a,
+button,
+[role='button'],
+select,
+label,
+summary {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='7' fill='%23141414' fill-opacity='0.12' stroke='%23141414' stroke-width='1.75'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23141414'/%3E%3C/svg%3E")
+      12 12,
+    pointer;
+}
+.dark * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.5' fill='%23f4f4f4' stroke='%23141414' stroke-width='2'/%3E%3C/svg%3E")
+      12 12,
+    default;
+}
+.dark a,
+.dark button,
+.dark [role='button'],
+.dark select,
+.dark label,
+.dark summary {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='7' fill='%23f4f4f4' fill-opacity='0.15' stroke='%23f4f4f4' stroke-width='1.75'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23f4f4f4'/%3E%3C/svg%3E")
+      12 12,
+    pointer;
+}
+/* Text fields keep the native text beam; the console keeps native cursors. */
+input,
+textarea,
+[contenteditable='true'] {
+  cursor: text;
+}
+.admin-ui,
+.admin-ui * {
+  cursor: auto;
+}
