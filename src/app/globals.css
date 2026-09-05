@@ -114,10 +114,6 @@ body {
   .pretty {
     text-wrap: pretty;
   }
-  /* Grayscale-at-rest media, colour on hover — the spec's portrait treatment. */
-  .media-gray {
-    @apply grayscale transition-[filter,transform] duration-500 hover:grayscale-0;
-  }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
