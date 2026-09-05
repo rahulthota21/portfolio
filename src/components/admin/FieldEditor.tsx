@@ -42,6 +42,7 @@ function MediaInput({
 }) {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');
+  const isImage = !!value && /\.(png|jpe?g|webp|gif|svg|avif)$/i.test(value);
 
   async function handleFile(file: File) {
     setBusy(true);
@@ -53,7 +54,7 @@ function MediaInput({
     setBusy(false);
     if (res.ok && res.url) {
       onChange(res.url);
-      setMsg('Uploaded.');
+      setMsg('Uploaded and attached to this item.');
     } else {
       setMsg(res.message);
     }
@@ -65,7 +66,7 @@ function MediaInput({
         <input
           className="field-input"
           value={value ?? ''}
-          placeholder="/path or https://…"
+          placeholder="/posters/file.jpg or https://…"
           onChange={(e) => onChange(e.target.value)}
         />
         <label className="pill-outline shrink-0 cursor-pointer">
@@ -73,18 +74,24 @@ function MediaInput({
           {busy ? 'Uploading…' : 'Upload'}
           <input
             type="file"
+            accept="image/*,application/pdf"
             className="hidden"
             onChange={(e) => {
               const f = e.target.files?.[0];
+              e.target.value = '';
               if (f) void handleFile(f);
             }}
           />
         </label>
       </div>
       {msg && <p className="text-caption text-muted">{msg}</p>}
-      {value && /\.(png|jpe?g|webp|gif|svg)$/i.test(value) && (
+      {isImage && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={value} alt="" className="h-24 w-auto rounded-sm border border-hairline-soft object-cover" />
+        <img
+          src={value}
+          alt=""
+          className="h-28 w-28 rounded-sm border border-hairline-soft object-cover"
+        />
       )}
     </div>
   );
@@ -239,9 +246,14 @@ export function FieldEditor({
                     (item as Record<string, Json>).year)
                   : null) ?? `Item ${i + 1}`;
               return (
-                <div key={i} className="rounded-sm border border-hairline-soft p-md">
+                <div key={i} className="rounded-md border border-hairline-soft bg-canvas-soft/60 p-md">
                   <div className="mb-sm flex items-center justify-between gap-sm">
-                    <p className="truncate text-body-sm text-ink">{String(heading)}</p>
+                    <p className="flex items-center gap-sm truncate text-body-sm text-ink">
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-canvas text-caption text-muted">
+                        {i + 1}
+                      </span>
+                      {String(heading)}
+                    </p>
                     <div className="flex shrink-0 items-center gap-1">
                       <button type="button" onClick={() => move(i, -1)} aria-label="Move up" className="grid h-8 w-8 place-items-center rounded-full hover:bg-canvas-soft">
                         <Up width={14} height={14} />
