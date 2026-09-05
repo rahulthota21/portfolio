@@ -1,5 +1,5 @@
 import { ContactForm } from '@/components/ContactForm';
-import { socialIcon } from '@/components/Icons';
+import { Mail, socialIcon } from '@/components/Icons';
 import { Reveal } from '@/components/Reveal';
 import { SectionHeader } from '@/components/SectionHeader';
 import type { SiteContent } from '@/data/types';
@@ -21,11 +21,9 @@ export function Contact({ content }: { content: SiteContent }) {
 
             <Reveal delay={80}>
               <div className="mt-lg flex flex-col gap-sm">
-                <a
-                  href={`mailto:${identity.email}`}
-                  className="text-h4 text-ink underline decoration-hairline underline-offset-[6px] transition-colors hover:decoration-ink"
-                >
-                  {identity.email}
+                <a href={`mailto:${identity.email}`} className="pill-primary w-fit">
+                  <Mail width={16} height={16} />
+                  Email me
                 </a>
                 <p className="text-body-sm text-muted">
                   {identity.location} · {identity.availability.note}

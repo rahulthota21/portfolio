@@ -725,4 +725,6 @@ export const seed: SiteContent = {
   resume: { file: '/files/thota-rahul-resume.pdf', updated: 'September 2026' },
 
   footer: { line: '© 2026 Thota Rahul. All rights reserved.' },
+
+  settings: { backgroundArt: true },
 };

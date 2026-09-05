@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { ContactForm } from '@/components/ContactForm';
 import { FavouriteGroup } from '@/components/FavouriteGroup';
-import { ArrowUpRight } from '@/components/Icons';
+import { ArrowUpRight, Mail } from '@/components/Icons';
 import { Footer } from '@/components/Footer';
 import { Nav } from '@/components/Nav';
 import { Reveal } from '@/components/Reveal';
@@ -119,9 +119,10 @@ export default async function BeyondCodePage() {
                 </p>
                 <a
                   href={`mailto:${identity.email}`}
-                  className="mt-lg inline-flex text-body-sm text-ink underline decoration-hairline underline-offset-4 transition-colors hover:decoration-ink"
+                  className="mt-lg inline-flex items-center gap-2 text-body-sm font-semibold text-ink underline decoration-hairline underline-offset-4 transition-colors hover:decoration-ink"
                 >
-                  {identity.email}
+                  <Mail width={15} height={15} />
+                  Email me
                 </a>
               </div>
             </Reveal>

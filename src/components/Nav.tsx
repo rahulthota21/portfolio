@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -15,6 +15,7 @@ export function Nav({
   availabilityLabel: string;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -25,6 +26,14 @@ export function Nav({
   }, []);
 
   const onPersonal = pathname?.startsWith('/beyond-code');
+
+  /** On the home page the wordmark glides back to the top instead of jumping. */
+  function handleWordmarkClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (pathname !== '/') return;
+    e.preventDefault();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  }
 
   return (
     <header
@@ -39,6 +48,7 @@ export function Nav({
       >
         <Link
           href="/"
+          onClick={handleWordmarkClick}
           className="shrink-0 whitespace-nowrap rounded-full px-1 text-body font-semibold tracking-tight text-ink transition-opacity hover:opacity-70 sm:text-title"
         >
           {wordmark}

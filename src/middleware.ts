@@ -32,6 +32,8 @@ export async function middleware(req: NextRequest) {
   res.headers.set('X-Frame-Options', 'SAMEORIGIN');
   res.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  res.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains');
+  res.headers.set('Cross-Origin-Opener-Policy', 'same-origin');
 
   const { pathname } = req.nextUrl;
   if (!pathname.startsWith('/jackal')) return res;

@@ -164,4 +164,5 @@ export interface SiteContent {
   contact: Contact;
   resume: { file: string; updated: string };
   footer: { line: string };
+  settings: { backgroundArt: boolean };
 }
