@@ -42,10 +42,13 @@ export default async function JackalHome() {
 
   return (
     <AdminShell email={email}>
-      <div className="mb-lg flex flex-wrap items-end justify-between gap-md">
+      <div className="flex flex-wrap items-end justify-between gap-md">
         <div>
           <p className="eyebrow">Console</p>
           <h1 className="type-h2 mt-1 text-ink">Everything on the site, editable.</h1>
+          <p className="mt-sm max-w-prose text-body-sm text-muted">
+            Pick a section, change what you need, save - the live site updates within seconds.
+          </p>
         </div>
         <a href="/" target="_blank" rel="noreferrer" className="pill-outline">
           View site <ArrowUpRight width={15} height={15} />
@@ -54,31 +57,38 @@ export default async function JackalHome() {
 
       {/* Connection state */}
       <div
-        className={`mb-lg rounded-md p-lg ${
+        className={`mt-xl rounded-md p-lg ${
           supabaseConfigured ? 'bg-canvas-soft' : 'border border-hairline bg-canvas'
         }`}
       >
         <div className="flex flex-wrap items-center justify-between gap-md">
-          <div>
-            <p className="text-title text-ink">
-              {supabaseConfigured ? 'Supabase connected' : 'Running on seed data'}
-            </p>
-            <p className="mt-1 max-w-prose text-body-sm text-muted">
-              {supabaseConfigured
-                ? rowCount === 0
-                  ? 'The database is connected but empty. Press “Load seed content” once to copy all 15 sections in - after that this console edits the live site.'
-                  : `${rowCount} of ${SECTION_META.length} content rows found in the database. Saving here publishes to the live site within seconds.`
-                : 'Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local, run supabase/schema.sql in the SQL editor, then reload this page.'}
-            </p>
+          <div className="flex items-start gap-sm">
+            <span className="mt-2 h-2 w-2 shrink-0 animate-pulseDot rounded-full bg-ink" aria-hidden />
+            <div>
+              <p className="text-title text-ink">
+                {supabaseConfigured ? 'Supabase connected' : 'Running on seed data'}
+              </p>
+              <p className="mt-1 max-w-prose text-body-sm text-muted">
+                {supabaseConfigured
+                  ? rowCount === 0
+                    ? `Connected but empty. Press "Load seed content" once to copy all ${SECTION_META.length} sections in.`
+                    : `${rowCount} of ${SECTION_META.length} content rows live in the database. Saving here publishes to the site.`
+                  : 'Add the Supabase keys to .env.local, run supabase/schema.sql, then reload this page.'}
+              </p>
+            </div>
           </div>
           {supabaseConfigured && <SeedButton />}
         </div>
       </div>
 
       {/* Overview cards */}
-      <div className="mb-xl grid gap-px overflow-hidden rounded-md bg-hairline-soft sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-lg grid gap-sm sm:grid-cols-2 lg:grid-cols-4">
         {overview.map((o) => (
-          <Link key={o.label} href={o.href} className="bg-canvas px-lg py-lg transition-colors hover:bg-canvas-soft">
+          <Link
+            key={o.label}
+            href={o.href}
+            className="rounded-md border border-hairline-soft px-lg py-lg transition-colors hover:bg-canvas-soft"
+          >
             <span className="block text-h3 leading-none text-ink">{o.value}</span>
             <span className="mt-sm block text-body-sm text-muted">{o.label}</span>
           </Link>
@@ -87,31 +97,39 @@ export default async function JackalHome() {
 
       {/* Sections */}
       {groups.map((g) => (
-        <section key={g} className="mb-xl">
+        <section key={g} className="mt-xl">
           <h2 className="mb-sm text-label text-faint">{g}</h2>
           <div className="grid gap-sm md:grid-cols-2">
             {SECTION_META.filter((s) => s.group === g).map((s) => (
               <Link
                 key={s.key}
                 href={`/jackal/edit/${s.key}`}
-                className="group flex items-center justify-between gap-md rounded-sm border border-hairline-soft px-md py-md transition-colors hover:bg-canvas-soft"
+                className="group flex items-center justify-between gap-md rounded-md border border-hairline-soft px-md py-md transition-colors hover:bg-canvas-soft"
               >
-                <span>
+                <span className="min-w-0">
                   <span className="block text-body text-ink">{s.label}</span>
-                  <span className="block text-caption text-muted">{s.description}</span>
+                  <span className="block truncate text-caption text-muted">{s.description}</span>
                 </span>
-                <span className="shrink-0 text-caption text-faint">{countOf(s.key, content)}</span>
+                <span className="flex shrink-0 items-center gap-sm text-caption text-faint">
+                  {countOf(s.key, content)}
+                  <ArrowUpRight
+                    width={14}
+                    height={14}
+                    className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </span>
               </Link>
             ))}
           </div>
         </section>
       ))}
 
-      <section className="mb-xl">
+      {/* Files */}
+      <section className="mt-xl">
         <h2 className="mb-sm text-label text-faint">Files</h2>
         <Link
           href="/jackal/media"
-          className="flex items-center justify-between gap-md rounded-sm border border-hairline-soft px-md py-md transition-colors hover:bg-canvas-soft md:w-1/2"
+          className="group flex items-center justify-between gap-md rounded-md border border-hairline-soft px-md py-md transition-colors hover:bg-canvas-soft md:w-1/2"
         >
           <span>
             <span className="block text-body text-ink">Media & resume</span>
@@ -119,7 +137,11 @@ export default async function JackalHome() {
               Upload posters, diagrams, paper PDFs and a new resume
             </span>
           </span>
-          <ArrowUpRight width={16} height={16} className="text-muted" />
+          <ArrowUpRight
+            width={16}
+            height={16}
+            className="shrink-0 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          />
         </Link>
       </section>
     </AdminShell>

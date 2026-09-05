@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function JackalLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="admin-ui min-h-screen bg-canvas">
       <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       {children}
     </div>

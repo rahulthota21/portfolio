@@ -13,11 +13,13 @@ export function SectionEditor({
   sectionKey,
   initial,
   label,
+  description,
   live,
 }: {
   sectionKey: keyof SiteContent;
   initial: Json;
   label: string;
+  description?: string;
   live: boolean;
 }) {
   const [value, setValue] = useState<Json>(initial);
@@ -40,7 +42,7 @@ export function SectionEditor({
     if (raw) {
       try {
         payload = JSON.parse(rawText);
-      } catch (e) {
+      } catch {
         setBusy(false);
         setStatus({ ok: false, message: 'That JSON is not valid.' });
         return;
@@ -66,11 +68,12 @@ export function SectionEditor({
   }
 
   return (
-    <div className="pb-[120px]">
-      <div className="mb-lg flex flex-wrap items-center justify-between gap-sm">
+    <div className="pb-[110px]">
+      <div className="flex flex-wrap items-end justify-between gap-sm">
         <div>
           <p className="eyebrow">Editing</p>
           <h1 className="type-h3 mt-1 text-ink">{label}</h1>
+          {description && <p className="mt-sm text-body-sm text-muted">{description}</p>}
         </div>
         <div className="flex items-center gap-xs">
           <button
@@ -94,14 +97,14 @@ export function SectionEditor({
       </div>
 
       {!live && (
-        <div className="mb-lg rounded-sm border border-hairline bg-canvas-soft p-md text-body-sm text-muted">
+        <div className="mt-lg rounded-md border border-hairline bg-canvas-soft p-md text-body-sm text-muted">
           Supabase is not connected, so saving is disabled. Add your keys to
           <code className="mx-1 rounded bg-canvas px-1.5 py-0.5 text-caption">.env.local</code>
           and reload.
         </div>
       )}
 
-      <div className="rounded-md border border-hairline-soft bg-canvas p-lg">
+      <div className="mt-lg rounded-md border border-hairline-soft bg-canvas p-lg">
         {raw ? (
           <textarea
             value={rawText}
@@ -118,16 +121,27 @@ export function SectionEditor({
       </div>
 
       {/* Sticky save bar */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-canvas/95 backdrop-blur lg:left-[264px]">
-        <div className="flex items-center justify-between gap-md px-lg py-sm md:px-xl">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-canvas/95 backdrop-blur lg:left-[280px]">
+        <div className="mx-auto flex max-w-[1080px] items-center justify-between gap-md px-lg py-sm md:px-xl">
           <div className="flex items-center gap-sm text-body-sm">
             {status ? (
-              <span className={`inline-flex items-center gap-1.5 ${status.ok ? 'text-ink' : 'text-muted'}`}>
+              <span
+                className={`inline-flex items-center gap-1.5 ${status.ok ? 'text-ink' : 'text-muted'}`}
+              >
                 {status.ok && <Check width={15} height={15} />}
                 {status.message}
               </span>
             ) : (
-              <span className="text-muted">{dirty ? 'Unsaved changes' : 'Everything saved'}</span>
+              <span className="text-muted">
+                {dirty ? (
+                  <span className="inline-flex items-center gap-2">
+                    <span className="h-2 w-2 animate-pulseDot rounded-full bg-ink" aria-hidden />
+                    Unsaved changes
+                  </span>
+                ) : (
+                  'Everything saved'
+                )}
+              </span>
             )}
           </div>
           <div className="flex items-center gap-xs">
