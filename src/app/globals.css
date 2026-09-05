@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Light: gallery white. The spec's default. ───────────────────────── */
+:root {
+  --ink: 20 20 20;
+  --ink-soft: 38 38 38;
+  --text-muted: 112 112 112;
+  --text-faint: 173 173 173;
+  --canvas: 255 255 255;
+  --canvas-soft: 243 243 243;
+  --field: 240 240 240;
+  --hairline-soft: 240 240 240;
+  --hairline: 224 224 224;
+  --accent: 0 102 255;
+  --on-primary: 255 255 255;
+}
+
+/* ── Dark: the same ladder, polarity flipped. ────────────────────────── */
+.dark {
+  --ink: 244 244 244;
+  --ink-soft: 224 224 224;
+  --text-muted: 148 148 148;
+  --text-faint: 105 105 105;
+  --canvas: 13 13 13;
+  --canvas-soft: 26 26 26;
+  --field: 30 30 30;
+  --hairline-soft: 32 32 32;
+  --hairline: 46 46 46;
+  --accent: 77 148 255;
+  --on-primary: 13 13 13;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: rgb(var(--canvas));
+  color: rgb(var(--ink));
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgb(var(--ink));
+  color: rgb(var(--canvas));
+}
+
+/* Ink focus ring — the spec signals focus in ink, never in colour. */
+:focus-visible {
+  outline: 2px solid rgb(var(--ink));
+  outline-offset: 2px;
+  border-radius: 9999px;
+}
+
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-lg md:px-xl;
+  }
+
+  /* Stadium pills — a rectangular button does not exist in this system. */
+  .pill-primary {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full bg-ink px-lg text-link text-canvas
+           transition-[transform,opacity] duration-200 hover:opacity-90 active:scale-[0.98];
+  }
+  .pill-outline {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full border border-hairline bg-canvas px-lg
+           text-link text-ink transition-colors duration-200 hover:bg-canvas-soft active:scale-[0.98];
+  }
+  .pill-soft {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-full bg-canvas-soft px-lg text-link text-ink
+           transition-opacity duration-200 hover:opacity-80 active:scale-[0.98];
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-canvas-soft px-3 py-1.5 text-caption text-ink;
+  }
+  .chip-outline {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-hairline px-3 py-1.5 text-caption text-muted;
+  }
+
+  .card {
+    @apply rounded-md border border-hairline-soft bg-canvas;
+  }
+  .card-soft {
+    @apply rounded-md bg-canvas-soft;
+  }
+
+  .field-input {
+    @apply w-full rounded-sm bg-field px-md py-sm text-body text-ink placeholder:text-faint
+           outline-none ring-ink transition-shadow focus:ring-2;
+  }
+
+  .eyebrow {
+    @apply text-label text-muted;
+  }
+
+  .hairline-row {
+    @apply border-b border-hairline-soft;
+  }
+}
+
+@layer utilities {
+  .section-pad {
+    @apply py-section md:py-section-lg;
+  }
+  .balance {
+    text-wrap: balance;
+  }
+  .pretty {
+    text-wrap: pretty;
+  }
+  /* Grayscale-at-rest media, colour on hover — the spec's portrait treatment. */
+  .media-gray {
+    @apply grayscale transition-[filter,transform] duration-500 hover:grayscale-0;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Scroll reveal — respects prefers-reduced-motion. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Responsive display type — 80px is a desktop number. */
+.type-display {
+  font-size: clamp(40px, 8.2vw, 80px);
+  line-height: 1;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.type-h1 {
+  font-size: clamp(34px, 6vw, 56px);
+  line-height: 1.02;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+.type-h2 {
+  font-size: clamp(30px, 4.4vw, 44px);
+  line-height: 1.1;
+  font-weight: 650;
+  letter-spacing: -0.005em;
+}
+.type-h3 {
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.13;
+  font-weight: 650;
+}
