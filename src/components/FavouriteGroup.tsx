@@ -21,7 +21,7 @@ function Tile({ item, ratio }: { item: FavouriteItem; ratio: 'poster' | 'portrai
             src={item.image}
             alt={item.title}
             loading="lazy"
-            className="media-gray h-full w-full object-cover group-hover:scale-[1.03]"
+            className="h-full w-full object-cover grayscale transition-[filter,transform] duration-500 group-hover:grayscale-0 group-hover:scale-[1.03]"
           />
         ) : (
           <div className="grid h-full w-full place-items-center">
