@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, Download } from '@/components/Icons';
+import { ArrowRight, Download, Mail } from '@/components/Icons';
 import { Reveal } from '@/components/Reveal';
 import type { SiteContent } from '@/data/types';
 
@@ -104,9 +104,10 @@ export function Hero({ content }: { content: SiteContent }) {
 
               <a
                 href={`mailto:${identity.email}`}
-                className="mt-lg inline-flex text-body-sm text-ink underline decoration-hairline underline-offset-4 transition-colors hover:decoration-ink"
+                className="mt-lg inline-flex items-center gap-2 text-body-sm font-semibold text-ink underline decoration-hairline underline-offset-4 transition-colors hover:decoration-ink"
               >
-                {identity.email}
+                <Mail width={15} height={15} />
+                Email me
               </a>
             </aside>
           </Reveal>
