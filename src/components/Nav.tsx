@@ -27,10 +27,14 @@ export function Nav({
   const onPersonal = pathname?.startsWith('/beyond-code');
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-lg pt-lg md:pt-xl">
+    <header
+      className={`pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-lg pt-lg transition-[background-color,box-shadow] duration-300 md:pt-xl ${
+        scrolled ? 'bg-canvas/70 shadow-[0_1px_0_0_rgb(var(--hairline))] backdrop-blur-xl' : ''
+      }`}
+    >
       <nav
-        className={`pointer-events-auto flex w-full max-w-content items-center gap-xs rounded-full bg-canvas-soft py-2 pl-3 pr-2 transition-[box-shadow,background-color] duration-300 sm:pl-lg ${
-          scrolled ? 'shadow-[0_1px_0_0_rgb(var(--hairline))]' : ''
+        className={`pointer-events-auto flex w-full max-w-content items-center gap-xs rounded-full py-2 pl-3 pr-2 transition-[background-color,box-shadow] duration-300 sm:pl-lg ${
+          scrolled ? 'bg-transparent' : 'bg-canvas-soft'
         }`}
       >
         <Link
