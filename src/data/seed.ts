@@ -58,7 +58,7 @@ export const seed: SiteContent = {
     { value: '6', label: 'systems built end to end' },
     { value: '4', label: 'papers accepted at IEEE' },
     { value: '8.29', label: 'CGPA / 10.0' },
-    { value: '8/80', label: 'Tredence Hackathon - top teams' },
+    { value: 'Top 8', label: 'of 80 teams · Tredence Hackathon' },
   ],
 
   about: {
@@ -382,7 +382,7 @@ export const seed: SiteContent = {
         'Top-8 finalist among 80 teams at Tredence Hackathon 2025',
       ],
       metrics: [
-        { value: '8/80', label: 'Tredence Hackathon' },
+        { value: 'Top 8', label: 'of 80 teams' },
         { value: '24h', label: 'build sprint' },
       ],
       stack: ['Python', 'FastAPI', 'Travel APIs', 'LLM planning'],
