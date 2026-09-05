@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { BackgroundArt } from '@/components/BackgroundArt';
 import { themeScript } from '@/components/ThemeToggle';
 import { getContent } from '@/lib/content';
 
@@ -56,13 +57,17 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const content = await getContent();
+  const artOn = content.settings?.backgroundArt ?? true;
+
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="font-sans antialiased">
+        <BackgroundArt enabled={artOn} />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-lg focus:top-lg focus:z-[60] focus:rounded-full focus:bg-ink focus:px-lg focus:py-3 focus:text-link focus:text-canvas"

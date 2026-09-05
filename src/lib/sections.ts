@@ -21,6 +21,7 @@ export const SECTION_META: {
   { key: 'meta', label: 'SEO & metadata', description: 'Title, description, OG image', group: 'Site' },
   { key: 'resume', label: 'Resume file', description: 'The PDF served at /resume', group: 'Site' },
   { key: 'footer', label: 'Footer', description: 'The copyright line', group: 'Site' },
+  { key: 'settings', label: 'Appearance', description: 'Background line art on public pages', group: 'Site' },
 ];
 
 export function sectionLabel(key: string) {
@@ -36,5 +37,6 @@ export function countOf(key: keyof SiteContent, content: SiteContent): string {
     return `${filled}/${sections.length} sections filled`;
   }
   if (key === 'skills') return `${content.skills.groups.length} groups`;
+  if (key === 'settings') return content.settings?.backgroundArt ? 'Art on' : 'Art off';
   return 'Edit';
 }
