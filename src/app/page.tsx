@@ -34,7 +34,9 @@ export default async function HomePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        // Escape "<" so a content value like "</script>" can never break out
+        // of the JSON-LD block - the standard JSON-in-script hardening.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <Nav
         wordmark={content.identity.wordmark}
