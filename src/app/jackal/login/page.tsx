@@ -20,6 +20,12 @@ function LoginForm() {
 
   const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
+  /** Only ever bounce back to an internal path - never an off-site URL. */
+  function safeNext(): string {
+    const next = params.get('next');
+    return next && next.startsWith('/') && !next.startsWith('//') ? next : '/jackal';
+  }
+
   /** Turns terse Supabase errors into something actionable. */
   function friendly(message: string) {
     if (/invalid login credentials/i.test(message))
@@ -58,7 +64,7 @@ function LoginForm() {
       return;
     }
 
-    router.replace(params.get('next') || '/jackal');
+    router.replace(safeNext());
     router.refresh();
   }
 
@@ -94,7 +100,7 @@ function LoginForm() {
       setError(vErr.message);
       return;
     }
-    router.replace(params.get('next') || '/jackal');
+    router.replace(safeNext());
     router.refresh();
   }
 
