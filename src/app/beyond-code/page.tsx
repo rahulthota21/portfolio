@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ContactForm } from '@/components/ContactForm';
 import { FavouriteGroup } from '@/components/FavouriteGroup';
+import { ArrowUpRight } from '@/components/Icons';
 import { Footer } from '@/components/Footer';
 import { Nav } from '@/components/Nav';
 import { Reveal } from '@/components/Reveal';
@@ -83,8 +84,17 @@ export default async function BeyondCodePage() {
         {hasAny && (
           <section className="container-content mt-section">
             <Reveal>
-              <div className="border-b border-hairline-soft pb-lg">
+              <div className="flex flex-wrap items-end justify-between gap-md border-b border-hairline-soft pb-lg">
                 <h2 className="type-h2 text-ink">Things I like.</h2>
+                <a
+                  href="https://letterboxd.com/rahulthota/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="pill-outline shrink-0"
+                >
+                  Letterboxd
+                  <ArrowUpRight width={15} height={15} />
+                </a>
               </div>
             </Reveal>
             <div className="mt-lg">

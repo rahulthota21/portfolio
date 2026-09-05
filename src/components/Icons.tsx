@@ -110,9 +110,30 @@ export const Upload = (p: P) => (
     <path d="M12 17V5M7 9l5-5 5 5M4 21h16" />
   </svg>
 );
+export const Eye = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
+export const EyeOff = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M4 4l16 16" />
+    <path d="M10.7 5.7c.4-.1.9-.2 1.3-.2 6 0 9.5 6.5 9.5 6.5a17.6 17.6 0 0 1-2.9 3.7M6.6 6.7C3.9 8.5 2.5 12 2.5 12S6 18.5 12 18.5c1.2 0 2.3-.3 3.3-.7" />
+    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+  </svg>
+);
+export const Letterboxd = (p: P) => (
+  <svg {...base} {...p} fill="currentColor" stroke="none">
+    <circle cx="4.5" cy="12" r="3.4" />
+    <circle cx="12" cy="12" r="3.4" />
+    <circle cx="19.5" cy="12" r="3.4" />
+  </svg>
+);
 
 export const socialIcon: Record<string, (p: P) => JSX.Element> = {
   linkedin: Linkedin,
   github: Github,
+  letterboxd: Letterboxd,
   mail: Mail,
 };

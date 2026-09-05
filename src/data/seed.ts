@@ -717,6 +717,7 @@ export const seed: SiteContent = {
     socials: [
       { name: 'LinkedIn', url: 'https://www.linkedin.com/in/rahulthota21/', icon: 'linkedin' },
       { name: 'GitHub', url: 'https://github.com/rahulthota21', icon: 'github' },
+      { name: 'Letterboxd', url: 'https://letterboxd.com/rahulthota/', icon: 'letterboxd' },
       { name: 'Email', url: 'mailto:rahulthota21@gmail.com', icon: 'mail' },
     ],
   },
