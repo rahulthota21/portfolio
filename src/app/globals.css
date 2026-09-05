@@ -178,12 +178,13 @@ body {
   font-weight: 650;
 }
 
-/* ── Custom cursor - rendered natively by the browser: no JS, no lag,
-   pixel-perfect like the default arrow. Ink dot with a light halo so it
-   reads on both themes; links get a slightly larger ring. ────────────── */
+/* ── Custom cursor - rendered natively by the browser: no JS, no lag.
+   A two-tone arrow that anchors at its tip like the real arrow, so
+   pointing feels identical to the default. Links get a small dot badge.
+   Variants swap for dark mode; the console stays fully native. ───────── */
 * {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.5' fill='%23141414' stroke='%23ffffff' stroke-width='2'/%3E%3C/svg%3E")
-      12 12,
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M4 2 L4 18 L8.6 13.9 L11 19.4 L14.1 18.1 L11.7 12.7 L17.3 12.3 Z' fill='%23141414' stroke='%23ffffff' stroke-width='1.7' stroke-linejoin='round'/%3E%3C/svg%3E")
+      4 2,
     default;
 }
 a,
@@ -192,13 +193,13 @@ button,
 select,
 label,
 summary {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='7' fill='%23141414' fill-opacity='0.12' stroke='%23141414' stroke-width='1.75'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23141414'/%3E%3C/svg%3E")
-      12 12,
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M3 2 L3 16.4 L7.1 12.7 L9.3 17.8 L12 16.7 L9.8 11.7 L14.9 11.4 Z' fill='%23141414' stroke='%23ffffff' stroke-width='1.6' stroke-linejoin='round'/%3E%3Ccircle cx='19' cy='19' r='4.2' fill='%23141414' stroke='%23ffffff' stroke-width='1.6'/%3E%3C/svg%3E")
+      3 2,
     pointer;
 }
 .dark * {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.5' fill='%23f4f4f4' stroke='%23141414' stroke-width='2'/%3E%3C/svg%3E")
-      12 12,
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M4 2 L4 18 L8.6 13.9 L11 19.4 L14.1 18.1 L11.7 12.7 L17.3 12.3 Z' fill='%23f4f4f4' stroke='%23141414' stroke-width='1.7' stroke-linejoin='round'/%3E%3C/svg%3E")
+      4 2,
     default;
 }
 .dark a,
@@ -207,8 +208,8 @@ summary {
 .dark select,
 .dark label,
 .dark summary {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='7' fill='%23f4f4f4' fill-opacity='0.15' stroke='%23f4f4f4' stroke-width='1.75'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23f4f4f4'/%3E%3C/svg%3E")
-      12 12,
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M3 2 L3 16.4 L7.1 12.7 L9.3 17.8 L12 16.7 L9.8 11.7 L14.9 11.4 Z' fill='%23f4f4f4' stroke='%23141414' stroke-width='1.6' stroke-linejoin='round'/%3E%3Ccircle cx='19' cy='19' r='4.2' fill='%23f4f4f4' stroke='%23141414' stroke-width='1.6'/%3E%3C/svg%3E")
+      3 2,
     pointer;
 }
 /* Text fields keep the native text beam; the console keeps native cursors. */
