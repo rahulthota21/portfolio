@@ -11,7 +11,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: 'Beyond code',
   description:
-    'The films, series, sport and music I keep going back to — and the poster design work I do on the side.',
+    'The films, series, sport and music I keep going back to - and the poster design work I do on the side.',
 };
 
 export default async function BeyondCodePage() {
@@ -119,7 +119,7 @@ export default async function BeyondCodePage() {
               <div className="rounded-md bg-canvas p-lg">
                 <ContactForm
                   endpoint={endpoint}
-                  subject="Portfolio — design enquiry"
+                  subject="Portfolio - design enquiry"
                   cta={personal.freelance.cta}
                   compact
                   privacyNote={content.contact.privacyNote}

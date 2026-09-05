@@ -14,7 +14,7 @@ export const SECTION_META: {
   { key: 'skills', label: 'Skills', description: 'Groups and the tools inside them', group: 'Home page' },
   { key: 'journey', label: 'Journey', description: 'Timeline entries', group: 'Home page' },
   { key: 'testimonials', label: 'Testimonials', description: 'Quotes and their approval state', group: 'Home page' },
-  { key: 'blog', label: 'Writing', description: 'Posts — hidden until one is published', group: 'Home page' },
+  { key: 'blog', label: 'Writing', description: 'Posts - hidden until one is published', group: 'Home page' },
   { key: 'contact', label: 'Contact', description: 'Copy and social links', group: 'Home page' },
   { key: 'personal', label: 'Beyond code', description: 'Quote, Now, favourites, freelance card', group: 'Beyond code' },
   { key: 'identity', label: 'Identity', description: 'Name, email, availability, languages', group: 'Site' },

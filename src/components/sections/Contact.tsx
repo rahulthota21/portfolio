@@ -58,7 +58,7 @@ export function Contact({ content }: { content: SiteContent }) {
             <div className="card-soft p-lg md:p-xl">
               <ContactForm
                 endpoint={endpoint}
-                subject="Portfolio — hiring / general enquiry"
+                subject="Portfolio - hiring / general enquiry"
                 privacyNote={contact.privacyNote}
               />
             </div>

@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
 export const SUPABASE_ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '';
 // Optional. Either the legacy service_role JWT or a new sb_secret_… key.
-// Everything works without it — writes then run through the owner's session.
+// Everything works without it - writes then run through the owner's session.
 const SERVICE_ROLE =
   process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY || '';
 
@@ -26,7 +26,7 @@ export function createSupabaseServerClient() {
         try {
           cookieStore.set({ name, value, ...options });
         } catch {
-          /* called from a Server Component render — middleware refreshes instead */
+          /* called from a Server Component render - middleware refreshes instead */
         }
       },
       remove: (name: string, options: CookieOptions) => {

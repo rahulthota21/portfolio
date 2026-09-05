@@ -1,7 +1,7 @@
 import type { Artifact } from '@/data/types';
 
 /**
- * Abstract monochrome artifacts — one per project.
+ * Abstract monochrome artifacts - one per project.
  * Deliberately schematic, not fake screenshots: they suggest the shape of
  * each system without pretending to be its UI.
  */

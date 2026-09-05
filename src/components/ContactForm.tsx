@@ -68,7 +68,7 @@ export function ContactForm({
         <div>
           <p className="text-title text-ink">Message sent.</p>
           <p className="mt-1 text-body-sm text-muted">
-            Thanks for reaching out — I read everything and reply as soon as I can.
+            Thanks for reaching out - I read everything and reply as soon as I can.
           </p>
         </div>
       </div>

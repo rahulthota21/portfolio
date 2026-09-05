@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 /**
  * Counts a stat up when it scrolls into view.
- * Handles "8.29", "8/80", "6" and any string with digits — non-numeric
+ * Handles "8.29", "8/80", "6" and any string with digits - non-numeric
  * values (like "8/80") animate their leading number only.
  */
 export function Counter({ value }: { value: string }) {

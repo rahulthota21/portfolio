@@ -1,12 +1,12 @@
 import type { SiteContent } from './types';
 
 /**
- * Seed content — the single source of truth until Supabase is connected.
+ * Seed content - the single source of truth until Supabase is connected.
  * Every fact here comes from Rahul's own resume and brief. Nothing is invented.
  */
 export const seed: SiteContent = {
   meta: {
-    title: 'Thota Rahul — AI/ML Engineer & Backend Developer',
+    title: 'Thota Rahul - AI/ML Engineer & Backend Developer',
     description:
       'CSE graduate building AI/ML systems and the backends behind them. Six systems built end to end, four papers accepted at IEEE conferences.',
     author: 'Thota Rahul',
@@ -20,7 +20,7 @@ export const seed: SiteContent = {
     location: 'Vijayawada, Andhra Pradesh',
     nativePlace: 'Krishna district, Andhra Pradesh',
     email: 'rahulthota21@gmail.com',
-    languages: ['Telugu — native', 'English — proficient', 'Hindi — basics'],
+    languages: ['Telugu - native', 'English - proficient', 'Hindi - basics'],
     availability: {
       open: true,
       label: 'Open to work',
@@ -58,21 +58,21 @@ export const seed: SiteContent = {
     { value: '6', label: 'systems built end to end' },
     { value: '4', label: 'papers accepted at IEEE' },
     { value: '8.29', label: 'CGPA / 10.0' },
-    { value: '8/80', label: 'Tredence Hackathon — top teams' },
+    { value: '8/80', label: 'Tredence Hackathon - top teams' },
   ],
 
   about: {
     heading: 'About',
     body: [
-      'I am a Computer Science graduate from Amrita Vishwa Vidyapeetham, Amritapuri, who likes building AI systems that actually ship. My work sits at the intersection of machine learning and backend engineering — from screening chest CT scans on edge devices, to ranking resumes with LLMs, to a tutoring system that notices how a learner feels.',
-      'I care about systems that run on modest hardware, that explain themselves, and that are honest about what they can do. Each of my major projects was built end to end — model, backend, interface — and four were written up as papers accepted at IEEE conferences.',
+      'I am a Computer Science graduate from Amrita Vishwa Vidyapeetham, Amritapuri, who likes building AI systems that actually ship. My work sits at the intersection of machine learning and backend engineering - from screening chest CT scans on edge devices, to ranking resumes with LLMs, to a tutoring system that notices how a learner feels.',
+      'I care about systems that run on modest hardware, that explain themselves, and that are honest about what they can do. Each of my major projects was built end to end - model, backend, interface - and four were written up as papers accepted at IEEE conferences.',
       'Away from code, I design posters for clients and enjoy cricket, Formula 1, and films that make you think.',
     ],
     quickFacts: [
       { label: 'Based in', value: 'Vijayawada, Andhra Pradesh' },
       { label: 'Open to', value: 'Relocation · software roles' },
       { label: 'Languages', value: 'Telugu · English · Hindi' },
-      { label: 'Scholarship', value: 'NMMS — National Means-cum-Merit' },
+      { label: 'Scholarship', value: 'NMMS - National Means-cum-Merit' },
     ],
   },
 
@@ -138,18 +138,18 @@ export const seed: SiteContent = {
       subtitle: 'Lung nodule screening on edge devices',
       category: 'Medical AI',
       role: 'Project Lead',
-      timeline: '2025 – 2026',
+      timeline: '2025 - 2026',
       badge: 'IEEE GCON-26 · accepted',
       status: 'Accepted',
       overview:
-        'A screening system for chest CT scans that assists early lung nodule assessment in resource-constrained healthcare settings — built to run offline on edge hardware.',
+        'A screening system for chest CT scans that assists early lung nodule assessment in resource-constrained healthcare settings - built to run offline on edge hardware.',
       problem:
         'Early lung cancer screening needs radiologists and connectivity that most rural and underserved settings simply do not have. Most deep learning solutions assume high-end GPUs, constant connectivity and a specialist on hand.',
       solution:
-        'An asynchronous, modular pipeline that runs locally: CT preprocessing, nodule detection, 3D segmentation, malignancy risk estimation and structured reporting — with explainability built in, not bolted on.',
+        'An asynchronous, modular pipeline that runs locally: CT preprocessing, nodule detection, 3D segmentation, malignancy risk estimation and structured reporting - with explainability built in, not bolted on.',
       highlights: [
         'Explainability through segmentation masks and Grad-CAM saliency maps',
-        'Structured findings that feed clinician reports — and patient-friendly summaries',
+        'Structured findings that feed clinician reports - and patient-friendly summaries',
         'Lightweight models so a kiosk-class machine can do the work',
       ],
       metrics: [
@@ -198,11 +198,11 @@ export const seed: SiteContent = {
       subtitle: 'AI-powered resume screening & mock interviews',
       category: 'Recruiting',
       role: 'Project Lead',
-      timeline: 'Mar 2025 – Jul 2025',
+      timeline: 'Mar 2025 - Jul 2025',
       badge: 'IEEE ICCNT 2026 · accepted',
       status: 'Accepted',
       overview:
-        'A recruiter-facing platform for automated resume screening and personalized mock interviews — combining candidate ranking with real-time stress and emotion feedback.',
+        'A recruiter-facing platform for automated resume screening and personalized mock interviews - combining candidate ranking with real-time stress and emotion feedback.',
       problem:
         'Recruiters skim hundreds of resumes with fixed templates and no control over what matters; candidates rehearse blindly, with zero feedback on how they come across under pressure.',
       solution:
@@ -256,18 +256,18 @@ export const seed: SiteContent = {
       subtitle: 'Sentiment-aware adaptive STEM tutor',
       category: 'ML Systems',
       role: 'Project Lead',
-      timeline: 'Jan 2025 – Apr 2025',
+      timeline: 'Jan 2025 - Apr 2025',
       badge: 'IEEE TALE 2026 · accepted',
       status: 'Accepted',
       overview:
         'An adaptive STEM tutoring system that adjusts explanations, quiz difficulty and response tone based on how the learner sounds, looks and writes.',
       problem:
-        'Most AI tutors answer every student the same way. They do not notice when a learner is confused, frustrated or bored — so the teaching never changes when it should.',
+        'Most AI tutors answer every student the same way. They do not notice when a learner is confused, frustrated or bored - so the teaching never changes when it should.',
       solution:
-        'AffectLearn listens to text, voice and face: RoBERTa reads sentiment, Whisper transcribes speech, a CNN reads facial cues — then a LoRA-tuned TinyLLaMA adapts its tone, difficulty and depth.',
+        'AffectLearn listens to text, voice and face: RoBERTa reads sentiment, Whisper transcribes speech, a CNN reads facial cues - then a LoRA-tuned TinyLLaMA adapts its tone, difficulty and depth.',
       highlights: [
-        'LoRA-tuned TinyLLaMA — runs on plain consumer GPUs',
-        'RAG grounded in FAISS-indexed OpenStax textbooks — answers stay accurate',
+        'LoRA-tuned TinyLLaMA - runs on plain consumer GPUs',
+        'RAG grounded in FAISS-indexed OpenStax textbooks - answers stay accurate',
         'Session feedback stored in Supabase for a picture of the learner over time',
       ],
       metrics: [
@@ -313,18 +313,18 @@ export const seed: SiteContent = {
       subtitle: 'Explainable AI for climate-smart housing',
       category: 'ML Systems',
       role: 'Co-author · ML & backend',
-      timeline: '2025 – 2026',
+      timeline: '2025 - 2026',
       badge: 'IEEE · accepted',
       status: 'Accepted',
       overview:
-        "A multi-hazard housing safety recommendation system that scores any location's flood, heat and drought risk — and explains why, with SHAP.",
+        "A multi-hazard housing safety recommendation system that scores any location's flood, heat and drought risk - and explains why, with SHAP.",
       problem:
         'City planners and families decide where to build and live using static maps and old averages, while climate risk shifts year by year.',
       solution:
         'Google Earth Engine pulls multisource geospatial data; BigQuery processes it; an XGBoost classifier scores risk in real time; SHAP explains every prediction; a Gemini assistant answers in plain language.',
       highlights: [
         'Composite Climate Risk Index from flood, heat and drought signals',
-        'XGBoost tuned on a globally diverse set — 14,522 locations tested',
+        'XGBoost tuned on a globally diverse set - 14,522 locations tested',
         'Containerized on Google Cloud with a Next.js map interface',
       ],
       metrics: [
@@ -374,7 +374,7 @@ export const seed: SiteContent = {
       overview:
         'An AI itinerary planner built in a 24-hour sprint, wiring real-time travel APIs into a trip that adapts to weather, budget and pace.',
       problem:
-        'Planning a trip across bookings, weather and timings usually means a dozen tabs — and one change breaks the whole plan.',
+        'Planning a trip across bookings, weather and timings usually means a dozen tabs - and one change breaks the whole plan.',
       solution:
         'Feed TravelSync the cities and days; it plans the route, slots activities against live availability and re-plans when something changes.',
       highlights: [
@@ -406,11 +406,11 @@ export const seed: SiteContent = {
       subtitle: 'AI-powered diabetes detection',
       category: 'ML Systems',
       role: 'AI/ML Intern · Infosys Springboard',
-      timeline: 'Oct 2024 – Dec 2024',
+      timeline: 'Oct 2024 - Dec 2024',
       badge: 'Infosys Springboard',
       status: 'Internship project · certified',
       overview:
-        'A machine-learning pipeline that classifies individuals as diabetic, pre-diabetic or healthy from healthcare and lifestyle data — built for early risk detection.',
+        'A machine-learning pipeline that classifies individuals as diabetic, pre-diabetic or healthy from healthcare and lifestyle data - built for early risk detection.',
       problem: 'Diabetes is often detected late, when intervention is harder and costlier.',
       solution:
         'A scikit-learn pipeline with careful feature selection and median imputation, comparing multiple classifiers on precision, recall, F1 and AUC.',
@@ -495,55 +495,55 @@ export const seed: SiteContent = {
     {
       year: '2017',
       title: 'NMMS Scholarship',
-      detail: 'National Means-cum-Merit Scholarship — awarded in 8th standard',
+      detail: 'National Means-cum-Merit Scholarship - awarded in 8th standard',
       tag: 'Achievement',
       order: 1,
     },
     {
-      year: '2022 – 2026',
+      year: '2022 - 2026',
       title: 'B.Tech CSE · Amrita Vishwa Vidyapeetham',
       detail: 'Amritapuri campus · CGPA 8.29 / 10.0',
       tag: 'Education',
       order: 2,
     },
     {
-      year: 'Oct – Dec 2024',
+      year: 'Oct - Dec 2024',
       title: 'AI/ML Intern · Infosys Springboard',
-      detail: 'Built GlucoSense — diabetes risk classification pipeline · certificate awarded',
+      detail: 'Built GlucoSense - diabetes risk classification pipeline · certificate awarded',
       tag: 'Experience',
       order: 3,
     },
     {
-      year: 'Jan – Apr 2025',
-      title: 'AffectLearn — Project Lead',
+      year: 'Jan - Apr 2025',
+      title: 'AffectLearn - Project Lead',
       detail: 'Sentiment-aware STEM tutor with LoRA-tuned TinyLLaMA · accepted at IEEE TALE 2026',
       tag: 'Project',
       order: 4,
     },
     {
-      year: 'Mar – Jul 2025',
-      title: "Mock'n-Hire — Project Lead",
+      year: 'Mar - Jul 2025',
+      title: "Mock'n-Hire - Project Lead",
       detail: 'AI resume screening + mock interviews · accepted at IEEE ICCNT 2026',
       tag: 'Project',
       order: 5,
     },
     {
       year: '2025',
-      title: 'Tredence Hackathon — Top 8 of 80',
+      title: 'Tredence Hackathon - Top 8 of 80',
       detail: 'TravelSync, an AI itinerary planner, built in a 24-hour sprint',
       tag: 'Hackathon',
       order: 6,
     },
     {
-      year: '2025 – 2026',
-      title: 'EcoSphere-AI — Co-author',
+      year: '2025 - 2026',
+      title: 'EcoSphere-AI - Co-author',
       detail: 'Explainable AI for climate-smart housing · accepted at IEEE',
       tag: 'Project',
       order: 7,
     },
     {
-      year: 'Jan – May 2026',
-      title: 'HealthATM — Project Lead',
+      year: 'Jan - May 2026',
+      title: 'HealthATM - Project Lead',
       detail: 'Lung nodule screening on edge devices · accepted at IEEE GCON-26',
       tag: 'Project',
       order: 8,
@@ -593,7 +593,7 @@ export const seed: SiteContent = {
     },
   ],
 
-  // Empty until real posts are published from /jackal — the section stays hidden.
+  // Empty until real posts are published from /jackal - the section stays hidden.
   blog: [],
 
   personal: {
@@ -712,7 +712,7 @@ export const seed: SiteContent = {
 
   contact: {
     heading: 'Get in touch',
-    body: 'I am actively looking for software roles — AI/ML and backend. If you are hiring, or just want to talk systems, my inbox is open.',
+    body: 'I am actively looking for software roles - AI/ML and backend. If you are hiring, or just want to talk systems, my inbox is open.',
     privacyNote: 'Your information is only used to respond to your message.',
     socials: [
       { name: 'LinkedIn', url: 'https://www.linkedin.com/in/rahulthota21/', icon: 'linkedin' },

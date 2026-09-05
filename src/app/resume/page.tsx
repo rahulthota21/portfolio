@@ -10,7 +10,7 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Resume',
-  description: 'Resume of Thota Rahul — AI/ML engineer and backend developer.',
+  description: 'Resume of Thota Rahul - AI/ML engineer and backend developer.',
 };
 
 export default async function ResumePage() {
@@ -54,7 +54,7 @@ export default async function ResumePage() {
             </div>
           </Reveal>
 
-          {/* Live viewer — desktop */}
+          {/* Live viewer - desktop */}
           <Reveal delay={80}>
             <div className="mt-lg hidden md:block">
               <div className="overflow-hidden rounded-md border border-hairline-soft bg-canvas-soft">
@@ -90,12 +90,12 @@ export default async function ResumePage() {
             </div>
           </Reveal>
 
-          {/* Mobile fallback — inline PDF rendering is unreliable on phones */}
+          {/* Mobile fallback - inline PDF rendering is unreliable on phones */}
           <Reveal delay={80}>
             <div className="card-soft mt-lg p-lg md:hidden">
               <p className="text-title text-ink">One-page PDF</p>
               <p className="mt-sm text-body-sm text-muted">
-                Mobile browsers don’t reliably preview PDFs inline. Open or download it below — or
+                Mobile browsers don’t reliably preview PDFs inline. Open or download it below - or
                 read the same material as web pages.
               </p>
               <div className="mt-lg flex flex-wrap gap-sm">

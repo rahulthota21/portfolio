@@ -42,7 +42,7 @@ export async function getContent(): Promise<SiteContent> {
   }
 }
 
-/** Uncached read — used by the dashboard so edits appear immediately. */
+/** Uncached read - used by the dashboard so edits appear immediately. */
 export async function getContentFresh(): Promise<SiteContent> {
   if (!supabaseConfigured) return seed;
   try {

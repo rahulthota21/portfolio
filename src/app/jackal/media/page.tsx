@@ -24,14 +24,14 @@ export default async function MediaPage() {
         <h1 className="type-h3 mt-1 text-ink">Media & resume</h1>
         <p className="mt-sm max-w-prose text-body-sm text-muted">
           Uploads go to the public <code className="rounded bg-canvas-soft px-1.5 py-0.5">media</code>{' '}
-          bucket in Supabase Storage. Copy the URL and paste it into the field it belongs to — a
+          bucket in Supabase Storage. Copy the URL and paste it into the field it belongs to - a
           poster in Beyond code, a diagram on a project, a PDF on a paper.
         </p>
       </div>
 
       {!supabaseConfigured ? (
         <div className="rounded-md border border-hairline bg-canvas-soft p-lg text-body-sm text-muted">
-          Connect Supabase first — uploads need the storage bucket.
+          Connect Supabase first - uploads need the storage bucket.
         </div>
       ) : (
         <MediaUploader />

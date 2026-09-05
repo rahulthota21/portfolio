@@ -66,7 +66,7 @@ export default async function JackalHome() {
             <p className="mt-1 max-w-prose text-body-sm text-muted">
               {supabaseConfigured
                 ? rowCount === 0
-                  ? 'The database is connected but empty. Press “Load seed content” once to copy all 15 sections in — after that this console edits the live site.'
+                  ? 'The database is connected but empty. Press “Load seed content” once to copy all 15 sections in - after that this console edits the live site.'
                   : `${rowCount} of ${SECTION_META.length} content rows found in the database. Saving here publishes to the live site within seconds.`
                 : 'Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local, run supabase/schema.sql in the SQL editor, then reload this page.'}
             </p>

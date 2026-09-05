@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const url = process.env.NEXT_PUBLIC_SITE_URL || meta.url;
   return {
     metadataBase: new URL(url),
-    title: { default: meta.title, template: `%s — ${identity.name}` },
+    title: { default: meta.title, template: `%s - ${identity.name}` },
     description: meta.description,
     authors: [{ name: meta.author, url }],
     creator: meta.author,

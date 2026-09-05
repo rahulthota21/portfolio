@@ -8,7 +8,7 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr';
  *  3. Signs out and rejects anyone whose email is not ADMIN_EMAIL.
  * Security headers are applied site-wide; /jackal is additionally noindex.
  */
-/** Every /jackal response — including redirects — stays out of search engines. */
+/** Every /jackal response - including redirects - stays out of search engines. */
 function noIndex(res: NextResponse) {
   res.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
   return res;

@@ -115,7 +115,7 @@ export function Projects({ projects }: { projects: Project[] }) {
         <SectionHeader
           eyebrow="Selected work"
           title="Six systems, built end to end."
-          note="Model, backend and interface — each one shipped, measured and written up."
+          note="Model, backend and interface - each one shipped, measured and written up."
         />
         <div className="mt-xl grid gap-lg lg:grid-cols-2">
           {list.map((p, i) => (
