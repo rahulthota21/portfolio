@@ -1,0 +1,15 @@
+import { themeScript } from '@/components/ThemeToggle';
+
+export const metadata = {
+  title: 'Console',
+  robots: { index: false, follow: false },
+};
+
+export default function JackalLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="min-h-screen bg-canvas">
+      <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      {children}
+    </div>
+  );
+}
